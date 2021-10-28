@@ -1,6 +1,10 @@
-# factorio
+# [Factorio](<https://factorio.com/>)
 
 Factorio blueprint strings.
+
+[Factorio Calculator](<https://kirkmcdonald.github.io/calc.html>)
+
+[Factorio Cheat Sheet](<https://factoriocheatsheet.com/>)
 
 ## Resources
 

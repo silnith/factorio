@@ -6,6 +6,67 @@ Factorio blueprint strings.
 
 [Factorio Cheat Sheet](<https://factoriocheatsheet.com/>)
 
+These blueprints are all based around being able to tile substations for power.
+They are designed around 18x18 unit grid squares.  Before being rotated, all blueprints assume
+a main bus along the bottom edge that feeds in coal, stone, copper plates, iron plates, water,
+and crude oil.  The main bus blueprint provides yellow belts but can be upgraded to fast or express.
+
+Blueprints always use the lowest possible component that will satisfy the build requirement.
+Generally this means assembling machine 1, yellow belts, and standard inserters.  Some blueprints
+use fast transport belts to indicate the volume that they need in order to function effectively.
+Despite this, all blueprints are balanced around being fully upgraded to assembling machine 3
+and steel furnaces (or electric furnaces).  This means blueprints can be created with the lowest
+components, then later upgraded in-place to increase their output without needing redesign.
+In some cases, inserters might need to be upgraded to keep the upgraded assembling machines
+fully fed.  Transport belts should already be sufficient.  Note that this may make it appear
+that refineries and chemical plants are over-built, this is because they do not have upgrades
+whereas an assembling machine 1 can produce only 40% of the volume of an assembling machine 3.
+
+The smelting blueprint is designed to produce 4 yellow belts (or 2 red belts) of plates from
+an equal amount of ore when upgraded to steel or electric furnaces.  One smelting installation
+(of each ore type) can feed a default main bus.  Two installations are needed to feed a main
+bus upgraded to fast transport belts.  Three installations are needed to feed a main bus using
+express transport belts.  The smelting blueprint book includes combiners for each of these
+options.
+
+The train stops labeled "delivery" or "smelting" are designed to abut a smelting installation.
+Two ore delivery installations can feed one smelting installation.  A coal delivery can be
+inserted between the two ore delivery spots for stone or steel furnaces.  If using electric
+furnaces, that spot can instead be used to deliver crude oil (or water, not yet implemented).
+Train delivery stations include trains pre-programmed with the proper automated train stops
+for their cargo, including a refuelling stop.  Resource patches can have a resource train stop
+placed next to them, and the automated trains will use any and all available resource stops
+according to their capacities.  Delivery stops are limited to 1 train each, provider stops have
+no limits.  By default, each delivery stop only has one direction enabled, which assumes trains
+will enter and exit on the side opposite the smelting installation.  In the default configuration,
+the outer train stop is superfluous and can be removed.  In order to route the trains through the
+smelting installation instead of around, change the train limit for the outer train stop to 1.
+It is generally a good idea to set the inner stop limit to 0 so that trains don't try to enter
+from both sides and block each other.
+
+The recommended pattern for constructing tracks is to create whatever network is needed to reach
+each station, and then place rail chain signals on both sides of each track whenever one path
+splits into two paths.  For an intersection shaped like the letter "Y", four signals would be
+needed.  Two would go on the track matching the upper-left line of the "Y", and two on the
+upper-right line.  Each line would have one signal on each side of the track, forming a pair.
+By doing this, the network will be split up into segments where each segment is essentially one
+path between two intersections, where only one train can occupy that segment regardless of
+direction of travel.  By using chain signals, trains stopped at stations will wait until they
+have a clear path of travel from their current location all the way to their destination without
+stopping.  The chain signals will divide up the track segments such that trains can proceed as
+long as no other train wants to traverse any segment the train plans to use.  Two trains needing
+to use the same segment will alternate, with the second beginning once the first exits the
+conflicting segment.  Because of this, it is most efficient to place chain signals everywhere
+that tracks join or diverge, on the diverging side of the intersection.  Many-track intersections
+may require even more chain signals, for example an intersection that allows bi-directional
+transfers between three track lines will need at least six chain signals in total.
+
+Highly-packed switchyards may not have enough space to insert the proper amount of chain signals.
+This is especially true where multiple delivery train stops converge at smelting installations.
+In this case, just try to place chain signals at clear join points between indivisible knots.
+There will be some efficiency loss as trains cannot maximize their concurrency, but this strategy
+at least guarantees that no train will become stuck, nor that two trains will mutually deadlock.
+
 ## Resources
 
 ### Mining

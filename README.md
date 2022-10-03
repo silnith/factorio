@@ -67,6 +67,11 @@ In this case, just try to place chain signals at clear join points between indiv
 There will be some efficiency loss as trains cannot maximize their concurrency, but this strategy
 at least guarantees that no train will become stuck, nor that two trains will mutually deadlock.
 
+Loops and cycles in tracks are fine and often beneficial.  Be aware though that automated trains
+will take the shortest path to their destination even if that means waiting for other trains.
+They will not try to find a secondary route that would avoid using conflicting segments.
+They will make use of all available track, though, so as long as a path exists they will find it.
+
 ## Resources
 
 ### Mining
